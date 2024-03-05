@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PaymentJSON from "./smart-contracts/Payment.json";
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 import './App.css';
 
 function App() {

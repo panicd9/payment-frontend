@@ -44,7 +44,7 @@ function App() {
     useEffect(() => {
       async function initContract() {
           // Initialize the contract
-          const contractAddress = "0xb3B11b7DC6956D2640906D3093900c1807F56384";
+          const contractAddress = "0x708256D81d52d9c400dAe87Ce46C98CaC0827820";
           const contractInstance = new ethers.Contract(contractAddress, PaymentJSON.abi, signer)
 
           setContract(contractInstance);

@@ -176,12 +176,14 @@
 }
 
 .total-amount {
+  font-size: 20px;
   margin-top: 20px;
-  font-weight: bold;
+  color: white;
 }
 
 .blue-text {
   color: white;
+  font-weight: bold
 }
 
 .center-container {

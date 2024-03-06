@@ -37,13 +37,6 @@
   }
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 .form {
   background-color: #f9f9f9;
   padding: 30px;
@@ -62,13 +55,6 @@
   font-weight: bold;
 }
 
-.input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 20px;
-}
 
 .send-button {
   background-color: #4CAF50;
@@ -87,7 +73,94 @@
 }
 
 .connect-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
   background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 20%;
+}
+
+.connect-button:hover {
+  background-color: #005f7b;
+}
+
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  height: 100px; /* Adjust height as needed */
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+.logo {
+  width: 200px; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.payment-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 30%;
+}
+
+.payment-input, .amount-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.payment-input {
+  width: 80%; /* Adjust width as needed */
+  margin-right: 20px;
+}
+
+.amount-input {
+  width: 15%; /* Adjust width as needed */
+}
+
+.button-separator {
+  margin-top: 10px;
+}
+
+.new-payment-button {
+  margin-top: 10px;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 20%;
+}
+
+.new-payment-button:hover {
+  background-color: #005f7b;
+}
+
+.send-payments-button {
+  background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 4px;
@@ -95,10 +168,24 @@
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
-  width: 100%;
-  margin-bottom: 20px;
+  width: 20%;
 }
 
-.connect-button:hover {
-  background-color: #005f7b;
+.send-payments-button:hover {
+  background-color: #45a049;
+}
+
+.total-amount {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.blue-text {
+  color: white;
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

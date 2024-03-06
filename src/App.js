@@ -4,8 +4,8 @@ import { ethers } from "ethers";
 import './App.css';
 
 function App() {
-    const [address, setAddress] = useState('');
-    const [amount, setAmount] = useState('');
+    const [payments, setPayments] = useState([{ address: '', amount: '' }]);
+    const [totalAmount, setTotalAmount] = useState(0);
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
     const [contract, setContract] = useState(null);
@@ -44,7 +44,7 @@ function App() {
     useEffect(() => {
       async function initContract() {
           // Initialize the contract
-          const contractAddress = "0x4Ba90f3589248d7d46B7F86B5B875E48A546cb02"; // Replace with your contract address
+          const contractAddress = "0xb3B11b7DC6956D2640906D3093900c1807F56384";
           const contractInstance = new ethers.Contract(contractAddress, PaymentJSON.abi, signer)
 
           setContract(contractInstance);
@@ -53,10 +53,49 @@ function App() {
       initContract();
   }, [signer, provider]);
 
+    const handleAddressChange = (index, value) => {
+        const newPayments = [...payments];
+        newPayments[index].address = value;
+        setPayments(newPayments);
+    };
+
+    const handleAmountChange = (index, value) => {
+        const newPayments = [...payments];
+        newPayments[index].amount = value;
+        setPayments(newPayments);
+        calculateTotalAmount(payments);
+    };
+
+    const addPaymentPair = () => {
+        setPayments([...payments, { address: '', amount: '' }]);
+    };
+
+    const calculateTotalAmount = (payments) => {
+        const total = payments.reduce((acc, payment) => {
+          return acc + parseFloat(payment.amount || 0);
+        }, 0);
+        const round = (num, precision) => {
+            const factor = Math.pow(10, precision);
+            return Math.round(num * factor) / factor;
+          };
+          // Calculate total with 4 decimal places
+          const roundedTotal = round(total, 5);
+          setTotalAmount(roundedTotal);
+      };
+
     // Send Ethereum
     const sendEth = async () => {
         try {
-            const tx = await contract.sendPayment(address, { value: ethers.parseEther(amount) })
+            const nonEmptyPayments = payments.filter(payment => payment.address !== '' && payment.amount !== '');
+            setPayments(nonEmptyPayments);
+            const addresses = payments.map(payment => payment.address);
+            const amounts = payments.map(payment => ethers.parseEther(payment.amount));
+            const totalAmountWei = payments.reduce((acc, payment) => {
+                const amount = isNaN(payment.amount) ? 0n : ethers.parseEther(payment.amount.toString());
+                return acc + amount;
+            }, 0n);
+
+            const tx = await contract.sendPayment(addresses, amounts, { value: totalAmountWei })
             await tx.wait();
             console.log('Transaction successful');
         } catch (error) {
@@ -65,21 +104,53 @@ function App() {
     };
 
     return (
-        <div className="container">
-            {!signer && <button className="connect-button" onClick={connectWallet}>Connect Wallet</button>}
-            {signer && (
-                <div className="form">
-                    <label className="label">Address:</label>
-                    <input className="input" type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
-                    <br />
-                    <label className="label">Amount:</label>
-                    <input className="input" type="text" value={amount} onChange={(e) => setAmount(e.target.value)} />
-                    <br />
-                    <button className="send-button" onClick={sendEth}>Send</button>
+        <div>
+          <video className="background-video" autoPlay loop muted>
+            <source src="/background-video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="navbar">
+            <img src="/logo.svg" alt="logo" className="logo" />
+          </div>
+          {!signer ? (
+            <button className="connect-button" onClick={connectWallet}>
+              Connect Wallet
+            </button>
+          ) : (
+            <div className="center-container">
+              {payments.map((payment, index) => (
+                <div key={index} className="payment-container">
+                  <input
+                    type="text"
+                    placeholder="Address"
+                    value={payment.address}
+                    onChange={(e) => handleAddressChange(index, e.target.value)}
+                    className="payment-input"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Amount"
+                    value={payment.amount}
+                    onChange={(e) => handleAmountChange(index, e.target.value)}
+                    className="amount-input"
+                  />
                 </div>
-            )}
+              ))}
+              <button className="new-payment-button" onClick={addPaymentPair}>
+                New Payment
+              </button>
+              <div className="button-separator"></div>
+              <button className="send-payments-button" onClick={sendEth}>
+                Send Payments
+              </button>
+              <p className="total-amount">
+                Total Amount: <span className="blue-text">{totalAmount}</span>
+              </p>
+            </div>
+          )}
         </div>
-    );
+      );
+      
 }
 
 export default App;

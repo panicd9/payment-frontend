@@ -9,6 +9,7 @@ function App() {
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
     const [contract, setContract] = useState(null);
+    const [error, setError] = useState(null);
 
     // Connect to Metamask
     const connectWallet = async () => {
@@ -20,7 +21,8 @@ function App() {
                 const signer = await provider.getSigner();
                 setSigner(signer);
             } catch (error) {
-                console.error(error);
+                console.error("Error connecting to wallet:", error.message);
+                setError(error.message);
             }
         } else {
             console.error('Metamask not detected');
@@ -34,11 +36,16 @@ function App() {
           connectWallet();
         };
     
-        window.ethereum.on('accountsChanged', handleAccountsChanged);
-    
-        return () => {
-          window.ethereum.off('accountsChanged', handleAccountsChanged);
-        };
+        if (window.ethereum) {
+          window.ethereum.on('accountsChanged', handleAccountsChanged);
+  
+          return () => {
+              window.ethereum.off('accountsChanged', handleAccountsChanged);
+          };
+      } else {
+          console.warn('MetaMask is not installed');
+          setError('MetaMask is not installed');
+      }
       }, [])
 
     useEffect(() => {
@@ -99,7 +106,7 @@ function App() {
             await tx.wait();
             console.log('Transaction successful');
         } catch (error) {
-            console.error('Error sending transaction:', error);
+            console.error('Error sending transaction:', error.message);
         }
     };
 
@@ -148,6 +155,7 @@ function App() {
               </p>
             </div>
           )}
+          {error && <div className="error-message">{error}</div>}
         </div>
       );
       

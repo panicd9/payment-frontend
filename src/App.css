@@ -191,3 +191,13 @@
   flex-direction: column;
   align-items: center;
 }
+
+.error-message {
+  color: red;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}

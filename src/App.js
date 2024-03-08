@@ -137,7 +137,7 @@ function App() {
                 </div>
               ))}
               <button className="new-payment-button" onClick={addPaymentPair}>
-                New Payment
+                Additional Address
               </button>
               <div className="button-separator"></div>
               <button className="send-payments-button" onClick={sendEth}>

@@ -35,11 +35,16 @@ function App() {
     };
 
     useEffect(() => {
+      calculateTotalAmount(payments);
+    }, [payments]);
+
+    useEffect(() => {
         const handleAccountsChanged = (accounts) => {
           connectWallet();
         };
 
         const handleChainChanged = (accounts) => {
+          setError(null);
           connectWallet();
         };
     
@@ -99,7 +104,6 @@ function App() {
         const newPayments = [...payments];
         newPayments[index].amount = value;
         setPayments(newPayments);
-        calculateTotalAmount(payments);
     };
 
     const addPaymentPair = () => {

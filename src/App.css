@@ -146,8 +146,9 @@
   margin-bottom: 10px;
 }
 
-.new-payment-button:hover {
+.new-payment-button:hover, .send-payments-button:hover {
   background-color: #005f7b;
+  cursor: pointer;
 }
 
 .send-payments-button {
@@ -165,12 +166,13 @@
 }
 
 .send-payments-button:hover {
-  background-color: #45a049;
+  background-image: none;
+  background-color: #005f7b;
 }
 
-.button:hover {
+/* .button:hover {
   transform: translate(0, -2px);
-}
+} */
 
 .total-amount {
   font-size: 20px;
@@ -341,7 +343,7 @@
   width: 100%;
 }
 
-.payment-input, .amount-input, .total-amount {
+.payment-input, .amount-input, .total-amount, .connect-button {
   font-family: 'Inter', sans-serif;
 }
 
@@ -349,7 +351,7 @@
   font-size: 15px;
 }
 
-.new-payment-button, .send-payments-button {
+.new-payment-button, .send-payments-button{
   font-family: 'Inter', sans-serif;
   font-size: 14px;
 }
@@ -364,6 +366,12 @@
 
   .payment-container {
     /* max-width: 100px; */
+  }
+
+  .center-container {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
   }
 
   .payment-input {

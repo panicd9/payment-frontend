@@ -25,7 +25,6 @@ function App() {
 				setSigner(signer);
 			} catch (error) {
 				console.error("Error connecting to wallet:", error.message);
-				setError(error.message);
 			}
 		} else {
 			console.error('Metamask not detected');
@@ -205,43 +204,45 @@ function App() {
 							<div className="input-container">
 								<input
 									type="text"
-									placeholder=""
+									placeholder="Address"
 									value={payment.address}
 									onChange={(e) => handleAddressChange(index, e.target.value)}
 									className={`payment-input form__field ${invalidAddresses.includes(index) ? 'error' : ''}`}
 									id={`address-${index}`}
 								/>
 								{invalidAddresses.includes(index) && <div className="error-message">Invalid address</div>}
-								<label htmlFor={`address-${index}`} className="form__label">Address</label>
+								{/* <label htmlFor={`address-${index}`} className="form__label">Address</label> */}
 							</div>
 							<div className="input-container">
 								<input
 									type="text"
-									placeholder=""
+									placeholder="Amount"
 									value={payment.amount}
 									onChange={(e) => handleAmountChange(index, e.target.value)}
 									className={`amount-input form__field ${invalidAmounts.includes(index) ? 'error' : ''}`}
 									id={`amount-${index}`}
 								/>
 								{invalidAmounts.includes(index) && <div className="error-message">Invalid amount</div>}
-								<label htmlFor={`amount-${index}`} className="form__label">Amount</label>
+								{/* <label htmlFor={`amount-${index}`} className="form__label">Amount</label> */}
 							</div>
 							<div className="input-container">
-								<button className={`amount-input form__field remove-button`} onClick={() => deletePaymentPair(index)}>Remove</button>
+								<button className={`amount-input form__field remove-button`} onClick={() => deletePaymentPair(index)}>
+									<img className='remove-icon' src="/remove.png" alt="Remove" />
+									Remove</button>
 								<div className="error-message"></div>
-								<label htmlFor={`amount-${index}`} className="form__label"></label>
+								{/* <label htmlFor={`amount-${index}`} className="form__label"></label> */}
 							</div>
 						</div>
 					))}
-					<button className="new-payment-button button" onClick={addPaymentPair}>
-						Additional Address
+					<button className="new-payment-button" onClick={addPaymentPair}>
+						ADDITIONAL ADDRESS
 					</button>
 					<div className="button-separator"></div>
-					<button className="send-payments-button button" onClick={sendEth}>
-						Send Payments
+					<button className="send-payments-button" onClick={sendEth}>
+						SEND PAYMENTS
 					</button>
 					<p className="total-amount">
-						Total Amount: <span className="blue-text">{totalAmount}</span>
+						TOTAL AMOUNT: <span className="blue-text">{totalAmount}</span>
 					</p>
 				</div>
 			)}

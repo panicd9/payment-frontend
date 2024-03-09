@@ -57,19 +57,6 @@
   font-weight: bold;
 }
 
-
-.send-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 12px 20px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
 .connect-button {
   position: absolute;
   top: 50%;
@@ -149,8 +136,8 @@
 }
 
 .new-payment-button:hover, .send-payments-button:hover {
-  background-color: #005f7b;
   cursor: pointer;
+  transform: translate(0, -2px);
 }
 
 .send-payments-button {
@@ -166,15 +153,6 @@
 .new-payment-button, .send-payments-button {
   width: 250px;
 }
-
-.send-payments-button:hover {
-  background-image: none;
-  background-color: #005f7b;
-}
-
-/* .button:hover {
-  transform: translate(0, -2px);
-} */
 
 .total-amount {
   font-size: 20px;
@@ -222,20 +200,14 @@
   outline: none;
 }
 
-.amount-input::placeholder {
-  text-align: center;
-}
-
-.payment-input::placeholder {
-  padding-left: 20px;
-}
-
 .payment-input {
   min-width: 550px;
+  padding-left: 40px;
 }
 
 .amount-input {
   max-width: 150px;
+  text-align: center;
 }
 
 /* .form__group {
@@ -328,7 +300,7 @@
   /* padding: 0; */
 }
 .remove-button:hover {
-  color: #555;
+  transform: translate(0, -2px);
 }
 
 .remove-icon {

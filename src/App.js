@@ -224,7 +224,7 @@ function App() {
 								{invalidAmounts.includes(index) && <div className="error-message">Invalid amount</div>}
 							</div>
 							<div className="input-container">
-								<button className={`amount-input form__field remove-button`} onClick={() => deletePaymentPair(index)}>
+								<button className={`amount-input remove-button`} onClick={() => deletePaymentPair(index)}>
 									<img className='remove-icon' src="/remove.png" alt="Remove" />
 									Remove</button>
 								<div className="error-message"></div>

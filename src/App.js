@@ -71,14 +71,20 @@ function App() {
 				}
 				const network = await provider.getNetwork();
 				const chainId = network.chainId.toString();
-				const contractAddress = getContractAddress(chainId);
+				let contractAddress;
+				try {
+				  contractAddress = getContractAddress(chainId);
+				} catch (error) {
+				  console.error('Error getting contract address:', error.message);
+				  setError(error.message);
+				  return;
+				}
 				const contractInstance = new ethers.Contract(contractAddress, PaymentJSON.abi, signer)
 
 				console.log('Connected to: ', contractAddress);
 				setContract(contractInstance);
 			} catch (error) {
 				console.error('Error initializing contract:', error.message);
-				setError(error.message);
 			}
 
 		}

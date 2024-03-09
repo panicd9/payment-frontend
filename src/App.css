@@ -79,7 +79,7 @@
   background-image: linear-gradient(rgb(216,239,86), rgb(68,177,122));
   color: #000;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 20px;
   font-weight: 700;
@@ -91,6 +91,8 @@
   align-items: center;
   text-align: center;
   text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
 }
 
 .connect-button:hover {

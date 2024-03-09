@@ -200,18 +200,17 @@ function App() {
 			) : (
 				<div className="center-container">
 					{payments.map((payment, index) => (
-						<div key={index} className="payment-container form__group">
+						<div key={index} className="payment-container">
 							<div className="input-container">
 								<input
 									type="text"
 									placeholder="Address"
 									value={payment.address}
 									onChange={(e) => handleAddressChange(index, e.target.value)}
-									className={`payment-input form__field ${invalidAddresses.includes(index) ? 'error' : ''}`}
+									className={`payment-input ${invalidAddresses.includes(index) ? 'error' : ''}`}
 									id={`address-${index}`}
 								/>
 								{invalidAddresses.includes(index) && <div className="error-message">Invalid address</div>}
-								{/* <label htmlFor={`address-${index}`} className="form__label">Address</label> */}
 							</div>
 							<div className="input-container">
 								<input
@@ -219,18 +218,16 @@ function App() {
 									placeholder="Amount"
 									value={payment.amount}
 									onChange={(e) => handleAmountChange(index, e.target.value)}
-									className={`amount-input form__field ${invalidAmounts.includes(index) ? 'error' : ''}`}
+									className={`amount-input ${invalidAmounts.includes(index) ? 'error' : ''}`}
 									id={`amount-${index}`}
 								/>
 								{invalidAmounts.includes(index) && <div className="error-message">Invalid amount</div>}
-								{/* <label htmlFor={`amount-${index}`} className="form__label">Amount</label> */}
 							</div>
 							<div className="input-container">
 								<button className={`amount-input form__field remove-button`} onClick={() => deletePaymentPair(index)}>
 									<img className='remove-icon' src="/remove.png" alt="Remove" />
 									Remove</button>
 								<div className="error-message"></div>
-								{/* <label htmlFor={`amount-${index}`} className="form__label"></label> */}
 							</div>
 						</div>
 					))}

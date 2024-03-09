@@ -364,8 +364,14 @@
     width: auto;
   }
 
+  .payment-input {
+    min-width: auto;
+    width: 100%;
+  }
+  
   .payment-container {
     /* max-width: 100px; */
+    /* width: 10%; */
   }
 
   .center-container {
